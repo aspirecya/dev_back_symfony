@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <ul class="list-group">
+                <a href="/"><li class="list-group-item">Tous les posts</li></a>
+                {% for cat in categories %}
+                    <a href="/category/{{ cat.category }}"><li class="list-group-item">{{ cat.category }}</li></a>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+        {#{{ dump(posts) }}#}
+        <div class="row col-lg-8">
+            {% for post in posts %}
+                <!-- debut d'un post -->
+                <div class="col-lg-4">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.content }}</p>
+                    <small class="text-muted">{{ post.datePosted | date('d/m/Y') }}</small>
+                    <p><a class="btn btn-secondary" href="/post/{{ post.id }}" role="button">View details &raquo;</a></p>
+                </div><!-- /.col-lg-4 -->
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

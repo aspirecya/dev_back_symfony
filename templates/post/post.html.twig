@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="../../public/css/form.css">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="well mb-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="pull-left col-md-4 col-xs-12"><img class="center-block img-responsive" width="150%" height="150%" src='{{ asset('/photo/' ~ post.image ) }}' /></div>
+                    <div>
+                        <h1  class="hidden-xs hidden-sm m-2">{{ post.title }}</h1>
+                        <hr>
+                        <p class="text-justify">{{ post.content }}</p>
+                        <hr>
+                        <small>Post écrit le {{ post.datePosted | date('d/m/Y') }}</small><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="page-header">Comments ({{ comments | length }})</h2>
+                <section class="comment-list">
+                    <!-- First Comment -->
+                    {% for comment in comments %}
+                    <article class="row m-5">
+                        <div class="col-md-2 col-sm-2 hidden-xs">
+                            <figure class="thumbnail">
+                                <img class="img-responsive" width="100%" height="100%" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
+                                <figcaption class="text-center">{{ comment.pseudo }}</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-md-10 col-sm-10">
+                            <div class="panel panel-default arrow left">
+                                <div class="panel-body">
+                                    <header class="text-left">
+                                        <div class="comment-user"><i class="fa fa-user"></i> {{ comment.pseudo }}</div>
+                                        <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> {{ comment.datePosted | date('d/m/Y') }}</time>
+                                    </header>
+                                    <div class="comment-post">
+                                        <p>
+                                            {{ comment.content }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock %}
